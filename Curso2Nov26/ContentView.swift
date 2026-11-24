@@ -13,7 +13,13 @@ struct ContentView: View {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Probando login...")
+                .task {
+                    let vm = LoginViewModel()
+                    await vm.entrar(usuario: "usuarioprueba@gmail.com", password: "123456")
+                    print(vm.usuario.map{"\($0.name ?? "")"} ?? (vm.mensajeError ?? ""))
+                }
+
         }
         .padding()
     }
