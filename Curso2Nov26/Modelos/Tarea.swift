@@ -11,7 +11,7 @@ import Foundation
 nonisolated struct Tarea: Identifiable, Sendable {
     let id: Int
     let titulo: String
-    let terminada: Bool
+    var terminada: Bool
 }
 
 extension Tarea {

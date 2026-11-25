@@ -45,7 +45,7 @@ struct InicioView: View {
                     }
                 }.padding()
                 titulo("Últimas noticias")
-                LazyVStack( alignment:.leading, spacing:12){
+                LazyVStack( spacing:12){
                     ForEach(Noticia.ejemplos){noticia in
                         NoticiaFila(noticia: noticia)
                         Divider()

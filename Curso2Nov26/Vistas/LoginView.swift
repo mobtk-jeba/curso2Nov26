@@ -30,6 +30,10 @@ struct LoginView: View {
                     .frame(width: 200)
                     .padding(.top, 40)
                 Spacer()
+
+                CampoTexto(icono: "at", placeholder: "Usuario", texto: $usuario)
+                CampoTexto(icono: "lock", placeholder: "Contraseña", texto: $password, esSeguro: true)
+                /*
                 HStack{
                     Image("icoArroba")
                         .renderingMode(.template)
@@ -63,7 +67,7 @@ struct LoginView: View {
                     }label: {
                         Image("icoOjo")
                     }
-                }.estiloCampo()
+                }.estiloCampo()*/
                 if !password.isEmpty && password.count < 6 {
                     Text("Mínimo 6 caracteres")
                         .font(.caption)

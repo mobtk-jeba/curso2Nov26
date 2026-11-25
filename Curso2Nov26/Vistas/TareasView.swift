@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct TareasView: View {
-    let tareas = Tarea.ejemplos
+    @State private var tareas = Tarea.ejemplos
 
     var body: some View {
-        List(tareas){tarea in
-            HStack{
+        List($tareas){ $tarea in
+            Toggle(tarea.titulo, isOn: $tarea.terminada)
+            /*HStack{
                 Text(tarea.titulo)
                 Spacer()
                 Image(systemName: tarea.terminada ? "checkmark.circle.fill" : "circle")
                     .foregroundStyle(tarea.terminada ? .green: .gray)
-            }
+            }*/
         }
     }
 }

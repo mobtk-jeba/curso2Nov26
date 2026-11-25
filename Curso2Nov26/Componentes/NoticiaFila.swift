@@ -11,7 +11,7 @@ struct NoticiaFila: View {
     let noticia: Noticia
 
     var body: some View {
-        HStack(spacing:12){
+        HStack( spacing:12){
             AsyncImage(url: noticia.imagenURL){ fase in
                 switch fase{
                 case .empty:
@@ -38,11 +38,15 @@ struct NoticiaFila: View {
                     .font(.caption)
                     .foregroundStyle(.tertiary)
             }
+            .frame(maxWidth: .infinity)
             .padding(.vertical,4)
+            Spacer()
         }
     }
 }
 
 #Preview {
-    NoticiaFila(noticia: Noticia.ejemplos[0])
+    NoticiaFila(noticia: Noticia.ejemplos[2]).padding(
+
+    )
 }
