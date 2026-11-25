@@ -74,17 +74,22 @@ struct LoginView: View {
                     .foregroundStyle(.white)
                     .tint(Color("secondaryBlue"))
 
-                Button{
+                /*Button{
                     print("Entrar con usuario \(usuario)")
                 }label: {
                     Text("Entrar")
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 6)
-                }
+                }*/
+                BotonPrincipal(titulo: "Entrar", accion: {
+                    print("Entrar con usuario \(usuario)")
+                })
                 .buttonStyle(.borderedProminent)
                 .tint(Color("primaryBlue"))
                 .disabled(!formularioValido)
+
+                Text("Cognitus").foregroundStyle(Color.primary)
                 HStack{
                     Button("Crear cuenta"){}
                     Spacer()
