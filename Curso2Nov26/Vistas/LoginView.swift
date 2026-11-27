@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    @Environment(SesionModel.self) private var sesion
     @State private var usuario = ""
     @State private var password = ""
     @State private var mostrarPassword = false
@@ -87,7 +88,8 @@ struct LoginView: View {
                         .padding(.vertical, 6)
                 }*/
                 BotonPrincipal(titulo: "Entrar", accion: {
-                    print("Entrar con usuario \(usuario)")
+                    //print("Entrar con usuario \(usuario)")
+                    sesion.iniciarSesion(nombre: usuario)
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(Color("primaryBlue"))
@@ -109,4 +111,5 @@ struct LoginView: View {
 
 #Preview {
     LoginView()
+        .environment(SesionModel.ejemplo)
 }

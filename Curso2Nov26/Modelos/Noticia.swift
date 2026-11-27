@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Noticia: Identifiable, Sendable{
+struct Noticia: Identifiable, Sendable, Hashable{
     let id: Int
     let titulo: String
     let resumen: String

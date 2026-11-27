@@ -9,20 +9,21 @@
 import Foundation
 
 nonisolated struct Tarea: Identifiable, Sendable {
-    let id: Int
-    let titulo: String
+    let id = UUID()
+    var titulo: String
     var terminada: Bool
+    var notas: String
 }
 
 extension Tarea {
     static let ejemplos: [Tarea] = [
-        Tarea(id: 1, titulo: "Instalar Xcode 27"
-                , terminada:true),
-        Tarea(id: 2, titulo: "Terminar el login"
-                , terminada: false),
-        Tarea(id: 3, titulo: "Revisar el día 3"
-                , terminada: false),
-        Tarea(id: 4, titulo: "Revisar respuestas de servicios"
-                , terminada: false)
+        Tarea(titulo: "Instalar Xcode 27"
+              , terminada:true, notas:""),
+        Tarea(titulo: "Terminar el login"
+                , terminada: false, notas:""),
+        Tarea(titulo: "Revisar el día 3"
+                , terminada: false, notas:""),
+        Tarea(titulo: "Revisar respuestas de servicios"
+                , terminada: false, notas:"")
     ]
 }

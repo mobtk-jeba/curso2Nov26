@@ -28,6 +28,14 @@ struct SaludoView: View {
     }
 }
 
+struct SaludoSesionView: View {
+    @Environment(SesionModel.self) private var sesion
+
+    var body: some View {
+        Text("Hola, \(sesion.nombreMostrado)")
+    }
+}
+
 struct ContadorRoto: View {
     @State private var cuenta = 0
 
@@ -38,7 +46,18 @@ struct ContadorRoto: View {
     }
 }
 
+struct EditarSesionView: View{
+    @Environment(SesionModel.self) private var sesion
+    var body: some View {
+        @Bindable var sesion = sesion
+        TextField("Nombre",text: $sesion.nombreMostrado)
+        SaludoSesionView()
+    }
+}
+
 #Preview {
+    EditarSesionView()
+        .environment(SesionModel())
     //SaludoView(conectado: true)
-    ContadorRoto()
+    //ContadorRoto()
 }

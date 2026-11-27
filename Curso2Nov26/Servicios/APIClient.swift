@@ -24,29 +24,38 @@ enum ErrorAPI: LocalizedError {
     }
 }
 
-nonisolated struct APIClient {
-    private let url = URL(string: "https://cognitus.administradordemo.info/processrequest/processrequest-add")!
+nonisolated struct APIClient: Sendable {
+    private let base = URL(string: "https://cognitus.administradordemo.info/processrequest/")!
     private let campo = "datacog"
 
-    func enviar(_ consulta: String) async throws -> (Data, Int) {
-        print(consulta)
-        let base64 = Data(consulta.utf8).base64EncodedString()
-        print(base64)
+
+    func consulta<T: RespuestaConClave>(_ texto: String, como tipo: T.Type) async throws ->[T]{
+        let base64 = Data(texto.utf8).base64EncodedString()
         let valor = base64.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? ""
 
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.httpBody = "\(campo)=\(valor)".data(using: .utf8)
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        return try await enviar(ruta:"processrequest-add", cuerpo:"\(campo)=\(valor)", como: tipo)
+    }
 
+
+
+    private func enviar<T: RespuestaConClave>(ruta: String, cuerpo: String, como tipo: T.Type) async throws -> [T] {
+
+        var request = URLRequest(url: base.appending(path: ruta))
+        request.httpMethod = "POST"
+        request.httpBody = Data(cuerpo.utf8)
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.timeoutInterval = 20
+
+
+        let data: Data
+        let respuesta: URLResponse
         do{
-            let (data, response) = try await URLSession.shared.data(for: request)
-            let codigo = (response as? HTTPURLResponse)?.statusCode ?? -1
-            return (data,codigo)
-        }catch let e as URLError where e.code == .notConnectedToInternet{
+            let (data, respuesta) = try await URLSession.shared.data(for: request)
+            //let codigo = (response as? HTTPURLResponse)?.statusCode ?? -1
+            //return (data,codigo)
+        }catch let error as URLError where error.code == .notConnectedToInternet || error.code == .timedOut{
             throw ErrorAPI.sinConexion
         }
-
     }
 }
 

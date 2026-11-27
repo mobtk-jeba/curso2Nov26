@@ -47,7 +47,11 @@ struct InicioView: View {
                 titulo("Últimas noticias")
                 LazyVStack( spacing:12){
                     ForEach(Noticia.ejemplos){noticia in
-                        NoticiaFila(noticia: noticia)
+                        NavigationLink{
+                            NoticiaDetalleView(noticia: noticia)
+                        } label: {
+                            NoticiaFila(noticia: noticia)
+                        }.tint(.black)
                         Divider()
                     }
                 }

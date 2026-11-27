@@ -5,10 +5,19 @@
 //  Created by CARLOS GABRIEL TORRES PAEZ on 24/11/26.
 //
 
-struct RespuestaServicios<T: Decodable>: Decodable {
+/*struct RespuestaServicios<T: Decodable>: Decodable {
     let valid: Int
     let message: String?
     let user: [T]?
+}*/
+
+enum Perfil: String, CaseIterable, Identifiable{
+    case administrador = "Administrador"
+    case cliente = "Cliente"
+    case operador = "Operador"
+    case invitado = "Invitado"
+
+    var id: Self {self}
 }
 
 struct Usuario: Decodable {
